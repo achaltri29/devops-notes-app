@@ -2,7 +2,13 @@
 
 A full-stack cloud-native Notes application built using React, FastAPI, Docker, and AWS services.
 
+## Live Demo
+
+- [Frontend Link](https://main.d10xdct8i2q6t9.amplifyapp.com/)
+- [Backend Link](https://qory572cv6kn3pcmory3irubzi0rzjze.lambda-url.ap-south-1.on.aws/)
+
 ---
+
 
 # Architecture
 
