@@ -2,18 +2,29 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import "./App.css";
 
-const API_URL =
-  "https://qotcn1aeu1.execute-api.ap-south-1.amazonaws.com/prod";
-  
+const API_URL = import.meta.env.VITE_API_URL;
+const API_KEY = import.meta.env.VITE_API_KEY;
+
 function App() {
   const [notes, setNotes] = useState([]);
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [editingId, setEditingId] = useState(null);
 
+  const axiosConfig = {
+    headers: {
+      "x-api-key": API_KEY,
+      "Content-Type": "application/json",
+    },
+  };
+
   async function fetchNotes() {
     try {
-      const response = await axios.get(`${API_URL}/notes`);
+      const response = await axios.get(
+        `${API_URL}/notes`,
+        axiosConfig
+      );
+
       setNotes(response.data);
     } catch (error) {
       console.error("Error fetching notes:", error);
@@ -31,10 +42,14 @@ function App() {
     }
 
     try {
-      await axios.post(`${API_URL}/notes`, {
-        title,
-        content,
-      });
+      await axios.post(
+        `${API_URL}/notes`,
+        {
+          title,
+          content,
+        },
+        axiosConfig
+      );
 
       setTitle("");
       setContent("");
@@ -47,10 +62,14 @@ function App() {
 
   async function updateNote() {
     try {
-      await axios.put(`${API_URL}/notes/${editingId}`, {
-        title,
-        content,
-      });
+      await axios.put(
+        `${API_URL}/notes/${editingId}`,
+        {
+          title,
+          content,
+        },
+        axiosConfig
+      );
 
       setEditingId(null);
       setTitle("");
@@ -64,7 +83,11 @@ function App() {
 
   async function deleteNote(id) {
     try {
-      await axios.delete(`${API_URL}/notes/${id}`);
+      await axios.delete(
+        `${API_URL}/notes/${id}`,
+        axiosConfig
+      );
+
       fetchNotes();
     } catch (error) {
       console.error("Error deleting note:", error);
@@ -109,7 +132,9 @@ function App() {
             <p>{note.content}</p>
 
             <div className="buttons">
-              <button onClick={() => editNote(note)}>Edit</button>
+              <button onClick={() => editNote(note)}>
+                Edit
+              </button>
 
               <button onClick={() => deleteNote(note.id)}>
                 Delete
