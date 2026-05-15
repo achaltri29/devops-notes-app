@@ -3,7 +3,7 @@ import axios from "axios";
 import "./App.css";
 
 const API_URL =
-  "https://qory572cv6kn3pcmory3irubzi0rzjze.lambda-url.ap-south-1.on.aws";
+  "https://qotcn1aeu1.execute-api.ap-south-1.amazonaws.com/prod";
   
 function App() {
   const [notes, setNotes] = useState([]);
