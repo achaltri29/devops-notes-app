@@ -147,4 +147,7 @@ def delete_note(note_id: str):
 
 
 # Lambda handler
-handler = Mangum(app)
+handler = Mangum(
+    app,
+    api_gateway_base_path="/prod"
+)

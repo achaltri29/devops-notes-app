@@ -1,9 +1,9 @@
-FROM public.ecr.aws/lambda/python:3.12
+FROM public.ecr.aws/lambda/python:3.11
 
-COPY requirements.txt .
+COPY requirements.txt ./
 
 RUN pip install -r requirements.txt
 
-COPY app/main.py .
+COPY . .
 
-CMD ["main.handler"]
+CMD ["app.main.handler"]

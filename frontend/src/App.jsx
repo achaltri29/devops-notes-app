@@ -4,7 +4,7 @@ import "./App.css";
 
 const API_URL =
   "https://qory572cv6kn3pcmory3irubzi0rzjze.lambda-url.ap-south-1.on.aws";
-
+  
 function App() {
   const [notes, setNotes] = useState([]);
   const [title, setTitle] = useState("");
