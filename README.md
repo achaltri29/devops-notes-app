@@ -2,30 +2,42 @@
 
 A full-stack cloud-native Notes application built using React, FastAPI, Docker, and AWS services.
 
-## Live Demo
-
-- [Frontend Link](https://main.d10xdct8i2q6t9.amplifyapp.com/)
-- [Backend Link](https://qory572cv6kn3pcmory3irubzi0rzjze.lambda-url.ap-south-1.on.aws/)
-
 ---
 
+# Live Demo
+
+- Frontend: https://main.d10xdct8i2q6t9.amplifyapp.com/
+- API Gateway Endpoint: https://a8tjwb5jf9.execute-api.ap-south-1.amazonaws.com/prod/notes
+
+---
 
 # Architecture
 
 ## Frontend
 - React + Vite
 - Hosted on AWS Amplify
+- Connected to backend using AWS API Gateway
 
 ## Backend
 - FastAPI
 - Dockerized backend service
 - Deployed on AWS Lambda
 
+## API Layer
+- AWS API Gateway
+- Lambda proxy integration
+- API Key authentication
+- CORS enabled
+
 ## Database
 - Amazon DynamoDB
 
-## Cloud Services Used
+---
+
+# Cloud Services Used
+
 - AWS Lambda
+- AWS API Gateway
 - AWS Amplify
 - Amazon DynamoDB
 - AWS IAM
@@ -41,7 +53,8 @@ A full-stack cloud-native Notes application built using React, FastAPI, Docker, 
 - Update notes
 - Delete notes
 - Persistent storage using DynamoDB
-- Fully deployed frontend and backend on AWS
+- API Gateway secured backend
+- Automatic frontend deployment using Amplify CI/CD
 
 ---
 
@@ -59,11 +72,26 @@ devops-notes-app/
 ├── frontend/
 │   ├── src/
 │   ├── public/
+│   ├── .env.local
 │   ├── Dockerfile
 │   └── package.json
 │
 ├── docker-compose.yaml
 └── README.md
+```
+
+---
+
+# Application Flow
+
+```text
+React Frontend (Amplify)
+        ↓
+AWS API Gateway
+        ↓
+AWS Lambda (FastAPI + Docker)
+        ↓
+Amazon DynamoDB
 ```
 
 ---
@@ -85,13 +113,13 @@ devops-notes-app/
 docker-compose up --build
 ```
 
-## Frontend
+Frontend:
 
 ```text
 http://localhost:5173
 ```
 
-## Backend
+Backend:
 
 ```text
 http://localhost:8000
@@ -111,6 +139,13 @@ Install dependencies:
 
 ```bash
 npm install
+```
+
+Create `.env.local`
+
+```env
+VITE_API_URL=https://a8tjwb5jf9.execute-api.ap-south-1.amazonaws.com/prod
+VITE_API_KEY=YOUR_API_KEY
 ```
 
 Run development server:
@@ -163,15 +198,19 @@ uvicorn app.main:app --reload
 
 # API Endpoints
 
-## Get all notes
+Base URL:
+
+```text
+https://a8tjwb5jf9.execute-api.ap-south-1.amazonaws.com/prod
+```
+
+Get all notes:
 
 ```http
 GET /notes
 ```
 
----
-
-## Create note
+Create note:
 
 ```http
 POST /notes
@@ -186,17 +225,13 @@ Request body:
 }
 ```
 
----
-
-## Update note
+Update note:
 
 ```http
 PUT /notes/{note_id}
 ```
 
----
-
-## Delete note
+Delete note:
 
 ```http
 DELETE /notes/{note_id}
@@ -211,10 +246,16 @@ DELETE /notes/{note_id}
 Backend deployed using:
 - Docker container
 - AWS Lambda
-- Function URL/API Gateway
+- API Gateway integration
 - DynamoDB integration
 
----
+## API Gateway Configuration
+
+- REST API using AWS API Gateway
+- Lambda proxy integration enabled
+- API Key authentication enabled
+- CORS configured for frontend access
+- Stage deployed as `prod`
 
 ## Frontend Deployment
 
@@ -225,25 +266,7 @@ Frontend deployed using:
 
 ---
 
-# Environment Variables
-
-## Frontend
-
-Create:
-
-```text
-frontend/.env
-```
-
-Add:
-
-```env
-VITE_API_URL=YOUR_BACKEND_URL
-```
-
----
-
-## Backend
+# Backend Environment Variables
 
 ```env
 NOTES_TABLE=NotesTable
@@ -259,6 +282,7 @@ AWS_DEFAULT_REGION=ap-south-1
 - FastAPI
 - Docker
 - AWS Lambda
+- AWS API Gateway
 - AWS Amplify
 - DynamoDB
 - GitHub
@@ -272,6 +296,8 @@ AWS_DEFAULT_REGION=ap-south-1
 - Terraform Infrastructure as Code
 - CloudWatch monitoring
 - ECS/Kubernetes deployment
+- Custom domain configuration
+- Rate limiting and request throttling
 
 ---
 
