@@ -6,8 +6,8 @@ A full-stack cloud-native Notes application built using React, FastAPI, Docker, 
 
 # Live Demo
 
-- Frontend: https://main.d10xdct8i2q6t9.amplifyapp.com/
-- API Gateway Endpoint: https://a8tjwb5jf9.execute-api.ap-south-1.amazonaws.com/prod/notes
+- [Frontend Link](https://main.d10xdct8i2q6t9.amplifyapp.com/)
+- [Backend API Link](https://a8tjwb5jf9.execute-api.ap-south-1.amazonaws.com/prod/notes)
 
 ---
 
